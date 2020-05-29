@@ -1,0 +1,23 @@
+name: Autobot
+description: Semi-autonomous course management.
+inputs:
+  workdir:
+    required: true
+    description: "Working directory for tasks"
+    default: ${GITHUB_WORKSPACE}
+  commands:
+    required: true
+    description: "Commands for Autobot to execute (with arguments pre-specified)."
+
+outputs:
+  status:
+    description: "Commit message with status."
+  semester:
+    description: "Semester Name"
+
+runs:
+  using: "docker"
+  image: "docker://docker.pkg.github.com/ionlights/ucfai-tasks/autobot"
+  args:
+    - ${{ inputs.workdir }}
+    - ${{ inputs.commands }}
